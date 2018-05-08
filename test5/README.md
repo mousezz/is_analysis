@@ -50,19 +50,19 @@
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
 |PersonNo|varchar2(32)|主键|否| | |预约的人员|
-|Password|varchar2(32)||否| ||密码|
+|Password|varchar2(32)||否| | |密码|
 |PersonInfo|varchar2(14)||否| ||人员信息|
 ## 1.7. 普通管理员表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
 |AdminID|varchar2(32)|主键|否| | |管理员账号|
-|Password|varchar2(32)||否| |密码||
+|Password|varchar2(32)||否| ||密码|
 
 ## 1.8. 系统管理员表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
 |RootId|varchar2(32)|主键|否| | |超级管理员|
-|Password|varchar2(32)|外键|否| |密码||
+|Password|varchar2(32)|外键|否| | |密码|
 
 ***
 
@@ -77,47 +77,46 @@
 1. 获取用户未归还图书API
 
 - 功能：用于获取某用户全部未归还图书
-- 请求地址： http://localhost/v1/api/get_unreturnbooks_4reader
+- 请求地址： http://mousess/v001/api/testbook
 - 请求方法：POST
 - 请求参数：
 
 |参数名称|必填|说明|
 |:-------:|:-------------: | :----------:|
-|userID|是|根据读者编号获取其未归还图书列表 |
+|BookNo|是|图书编号|
+|PersonNo|是| 借书人员|
+|LendTime|是| 借书时间|
+|LeastTime|是)| 还书时间|
+
+
+## 1.2. 借出书籍表
+|字段|类型|主键，外键|可以为空|默认值|约束|说明|
+|:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
 
 - 返回实例：
 ```
 {
-	"unreturnbooks_4reader": [{
-		"ISBN": "9787513506915",
-		"bookname": "翻译美学理论",
-		"author": "刘宓庆",
-		"startDate": "2018-03-03",
-		"isRenew": "true,
-		"activeTime": 30,
-		"returnDate": null
+	"testbook": [{
+		"BookNo": "2011205",
+		"PersonNo": "201510414069,
+		"LendTime": 2018-04-20,
+		"LeastTime": 2018-05-20
 	}, {
-        "ISBN": "9787544627634",
-		"bookname": "翻译能力培养",
-		"author": "舍夫纳",
-		"startDate": "2018-03-15",
-		"isRenew": true,
-		"activeTime": 30,
-		"returnDate": null
+		"BookNo": "2011201",
+		"PersonNo": "201510414229,
+		"LendTime": 2018-06-16,
+		"LeastTime": 2018-07-16
 	}, {
-        "ISBN": "9787310028306",
-		"bookname": "当代国外翻译理论导读",
-		"author": "谢天振",
-		"startDate": "2018-04-21",
-		"isRenew": false,
-		"activeTime": 30,
-		"returnDate": null
+		"BookNo": "20112033",
+		"PersonNo": "201510414219,
+		"LendTime": 2018-05-16,
+		"LeastTime": 2018-06-16
 	}],
-    "readerLendBook": {
-        "userID": "201510418736",
-        "username": "螺蛳粉",
-        "major": "食品加工",
-        "grade": "2015级"
+	   "readerLendBook": {
+        "userID": "201820151012",
+        "username": "张郭",
+        "major": "软件工程",
+        "grade": "2018级"
     },
 	"length": 3,
 	"status": 1
@@ -127,35 +126,38 @@
     
 |参数名称|说明|
 |:-------:|:-------------: |
-|unreturnbooks_4reader|该用户未归还图书的集合|
-|readerLendBook|该读者的用户信息|
-|length|未归还图书集合的长度|
+|reader|该用户未归还图书的集合|
+|LendBook|该读者的用户信息|
+|length|未归还图书集合的数目|
 |status|获取结果，为1时表示成功获取，为0时表示获取失败|
 
 2. 归还图书API
 - 功能：用于向系统提交需要归还的图书项目
-- 请求地址： http://localhost/v1/api/return_books
+- 请求地址： http://mousess/v001/api/return_book
 - 请求方法：POST
 - 请求参数：
 
-|参数名称|必填|说明|
-|:-------:|:-------------: | :----------:|
-|userID|是|根据读者编号归还其借阅图书 |
-|ISBN|是|待归还图书的ISBN号 |
+|参数名称|说明|
+|:-------:|:-------------: |
+|BookNo|归还的图书名称|
+|PersonNo|归还的人员|
+|ReturnTime|归还图书时间|
+|Fine|是否欠缴金额,并且返回|
 
 - 返回实例：
 ```
 {
-	"length": 2,
-	"status": 1
+	"BookNo": 1,
+	"PersonNo": 1
+	"ReturnTime": 1
+	"Fine": 1
 }
 ```
 - 返回参数说明：
     
 |参数名称|说明|
 |:-------:|:-------------: |
-|length|成功归还图书数量|
-|status|获取执行结果，为1时表示都成功执行，为0时表示存在执行失败|
-
-
- 
+|BookNo|成功归还图书返回1,如果存在欠费,则先处理欠费,处理成功返回1,失败返回0|
+|PersonNo|查询是否存在此人,存在返回1,失败为0|
+|ReturnTime|记录归还时间,是否超过应当归还时间,不超过返回1,超过返回2,跳转到Fine|
+|Fine|是否存在欠款,如果存在则缴纳,如果缴纳失败,则归还失败返回0,成功返回1,不存在欠费则为2|
