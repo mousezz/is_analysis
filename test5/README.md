@@ -8,62 +8,61 @@
 ## 1.1. 预约书籍表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|BookNo|varchar2(14)||否| | | 预约的书籍|
-|PersonNo|varchar2(60)|主键 |否||||愉悦的人员
+|BookNo|varchar2(32)||否| | | 预约的书籍|
+|PersonNo|varchar2(60)|主键 |否|||预约的人员|
 |BookingTime|varchar2(50)| |否|||预约时间|
-
 
 ## 1.2. 借出书籍表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|BookNo|varchar2(32)|主键|否||||
-|PersonNo|varchar2(32)| |否| '管理员'|||
-|LendTime|varchar2(32)| |否| '123456'| ||
-|LeastTime|varchar2(32)| |否| '123456'| ||
+|BookNo|varchar2(32)|主键、外键|否|||图书编号|
+|PersonNo|varchar2(32)| 外键|否| ||借书人员|
+|LendTime|varchar2(32)| |否| | |借书时间|
+|LeastTime|varchar2(32)| |否| | |还书时间|
 
 ## 1.3. 归还书籍表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|BookNo|varchar2(32)|主键|否||||
-|PersonNo|varchar2(32)| |否| | ||
-|ReturnTime|varchar2(32)| |否| '123456'| | 为空时密码为123456，密码采用32位MD5加密|
-|Fine|varchar2(50)| |是| | |该读者所在学院| 
+|BookNo|varchar2(32)|主键、外键|否|||图书编号|
+|PersonNo|varchar2(32)|外键 |否| | |归还人员|
+|ReturnTime|varchar2(32)| |否| | |归还时间 |
+|Fine|varchar2(32)| |是| | |如果超期则增加罚金| 
 
 ## 1.4. 书籍表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|BookNo|varchar2(32)|主键、外键|否|| |Reader.userID|
-|BookName|varchar2(50)| |否| | |学生专业|
-|Arthur|varchar2(10)| |否| | |学生年级|
-|ISBN|varchar2(32)|主键、外键|否|| |Reader.userID|
-|Publish|varchar2(50)| |否| | |学生专业|
-|price|varchar2(10)| |否| | |学生年级|
+|BookNo|varchar2(32)|主键、外键|否|| |图书编号|
+|BookName|varchar2(50)| |否| | |图书名称|
+|Arthur|varchar2(32)| |否| | |作者|
+|ISBN|varchar2(32)||否|| |条形码|
+|Publish|varchar2(50)| |否| | |出版社|
+|price|varchar2(10)| |否| | |价格|
 |BookState|varchar2(50)| |否| | |学生专业|
-|BookClass|varchar2(10)| |否| | |学生年级|
+|BookClass|varchar2(32)| |否| | |学生年级|
 ## 1.5. 借书卡表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|CardNo|varchar2(32)|主键、外键|否| |Reader.userID||
-|PersonNo|varchar2(50)| |否| | |老师职称|
-|LostTag|varchar2(50)| |否| | |老师职称|
+|CardNo|varchar2(32)|主键|否| ||一卡通|
+|PersonNo|varchar2(50)| |否| | |预约的人员|
+|LostTag|varchar2(50)| |否| | ||
 
 ## 1.6. 借书者表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|PersonNo|varchar2(32)|主键|否| | ||
-|Password|varchar2(32)|外键|否| |Administrator.userID||
-|PersonInfo|varchar2(14)|外键|否| |Book.ISBN||
+|PersonNo|varchar2(32)|主键|否| | |预约的人员|
+|Password|varchar2(32)||否| ||密码|
+|PersonInfo|varchar2(14)||否| ||人员信息|
 ## 1.7. 普通管理员表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|AdminID|varchar2(32)|主键|否| | ||
-|Password|varchar2(32)|外键|否| |Reader.userID||
+|AdminID|varchar2(32)|主键|否| | |管理员账号|
+|Password|varchar2(32)||否| |密码||
 
 ## 1.8. 系统管理员表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|RootId|varchar2(32)|主键|否| | ||
-|Password|varchar2(32)|外键|否| |Reader.userID||
+|RootId|varchar2(32)|主键|否| | |超级管理员|
+|Password|varchar2(32)|外键|否| |密码||
 
 ***
 
