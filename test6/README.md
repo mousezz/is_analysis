@@ -21,6 +21,7 @@
 ![](./pic/UseCase.png)
 
 ## 4. 类图设计 [源码](puml_use/Class.puml)
+![](./pic/Class.png)
 ## 5. 数据库设计  [源码](Database.md)
 ## 6. 用例及界面详细设计
 
