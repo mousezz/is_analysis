@@ -1,0 +1,10 @@
+@startuml
+title 基于GitHub的实验管理平台--查看个人信息
+actor User
+== 查看个人信息 ==
+User-> page : 进入主页
+page-> see: 查看个人信息
+see -> page
+== 查看个人信息 ==
+
+@enduml

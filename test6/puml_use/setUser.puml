@@ -1,0 +1,10 @@
+@startuml
+title 基于GitHub的实验管理平台--修改个人信息
+actor User
+== 修改个人信息 ==
+User-> into : 输入个人信息
+into -> change
+change -> into :返回更新的信息
+== 修改个人信息 ==
+
+@enduml

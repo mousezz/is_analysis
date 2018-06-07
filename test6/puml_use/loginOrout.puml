@@ -1,0 +1,14 @@
+@startuml
+title 基于GitHub的实验管理平台--登陆/登出
+actor visitor
+== 登陆注销 ==
+visitor-> into :进入主页面
+into -> login:输入账号密码
+login->judge:确定是否存在以及正确
+judge->ann:进入公告主页
+ann->logout:点击退出
+logout->visitor :返回主页面.状态变成游客
+
+== 登陆注销 ==
+
+@enduml

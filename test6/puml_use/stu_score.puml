@@ -1,0 +1,11 @@
+@startuml
+title 基于GitHub的实验管理平台--查看个人成绩
+actor students
+== 查看个人成绩 ==
+students ->grades : 进入班级
+grades-> class 
+class -> score :查看分数
+score -> grades :返回
+== 查看个人成绩 ==
+
+@enduml
