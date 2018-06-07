@@ -17,10 +17,10 @@
 
 # [界面设计参见](https://mousezz.github.io/is_analysis/test6/Ui/index.html)
 
-## 3. 用例图设计 [源码](src/usecase.puml)
+## 3. 用例图设计 [源码](puml_use/UseCase.puml)
 ![](./pic/UseCase.png)
 
-## 4. 类图设计 [源码](src/class.puml)
+## 4. 类图设计 [源码](puml_use/Class.puml)
 ## 5. 数据库设计  [源码](Database.md)
 ## 6. 用例及界面详细设计
 
