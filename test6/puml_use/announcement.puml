@@ -1,0 +1,14 @@
+@startuml
+title 基于GitHub的实验管理平台--公告列表用例的顺序图
+actor users
+users -> announcement: 查看公告
+alt 如果users是老师
+    users -> announcement
+	announcement -> teachers:
+	teachers -> publish: 修改公告
+    publish -->announcement:返回修改信息
+else 如果是students
+    users <-announcement:查看公告
+end
+
+@enduml

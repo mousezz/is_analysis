@@ -1,0 +1,84 @@
+@startuml
+title 基于GitHub的实验管理平台--类图
+class users {
+    <b>user_id</b> （用户ID）
+    name （用户姓名）
+    github_username （用户GitHub账号）
+    password （用户密码）
+    disable （用户是否禁用）
+}
+
+class teachers{
+    <b>teacher_id</b> （老师工号）
+    teacher_name （老师姓名）
+    college （学院）
+
+}
+    
+class students{
+    <b>student_id</b> （学生学号）
+    <b>grades_class</b>（年级/班级）
+    stu_name （姓名）
+    result_sum（成绩汇总）
+    web_sum （网站正确与否汇总）
+}
+
+users <|- students
+users <|- teachers
+
+class all_students{
+	<b>student_id</b> （学生学号）
+    stu_name （姓名）
+	grades_class（年级/班级）
+    name_list （学生列表）
+}
+class teachers_courses{
+	<b>teacher_id</b> （老师工号）
+	<b>course_id</b> （课程编号）
+    <b>teacher_cou</b>（老师教授的课程）
+    ann（发布公告）
+}
+class grades {
+  <b>grades_class</b>（年级/班级）
+  <b>student_id</b> （学生学号）
+  stu_name （姓名）
+  num_grades（班级学生列表）
+  grades_confirm（学生是否属于该班级）
+}
+class students_course{
+    <b>course_id</b> （课程编号）
+    <b>student_id</b> （学生学号）
+    course_name （课程名称）
+	all_courses（课程列表）
+    test_ann （作业公告）
+}
+class tests{
+    <b>teacher_id</b> （老师工号）
+	<b>course_id</b> （课程编号）
+    <b>student_id</b> （学生学号）
+    <b>test_id</b> （作业编号）
+    test_score1 （分数1）
+    test_score2 （分数2）
+    test_score3 （分数3）
+    略
+    .
+    
+}
+class course{
+	<b>student_id</b> （学生学号）
+    <b>course_id</b> （课程编号）
+	student_name （学生姓名）
+    all_courses （课程列表）
+
+    
+}
+students "1" -- "n" all_students
+teachers "1" -- "n" teachers_courses
+teachers_courses "1" -- "n" tests
+students "1" -- "n"  grades
+grades "1" --  "n" course
+students_course "n" -- "1" course
+teachers_courses "n" -- "students_course"
+tests "n" -- "1" students_course
+
+@enduml
