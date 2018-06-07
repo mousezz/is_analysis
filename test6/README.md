@@ -15,7 +15,7 @@
 ## 2. 系统总体结构
 ![](./pic/Flow_Chart.png)
 
-# [界面设计参见](https://github.com/mousezz/is_analysis/test6/Ui/index.html)
+# [界面设计参见](https://github.com/mousezz/is_analysis/tree/master/test6/Ui/index.html)
 
 ## 3. 用例图设计 [源码](src/usecase.puml)
 ![](./pic/UseCase.png)
